@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio – Nguyễn Văn A</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8f135;
+      --accent2: #7c3aed;
+      --text: #e8e8e8;
+      --muted: #666;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 2.5rem 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.4;
+    }
+    .hero-blob {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+    .hero-content { position: relative; max-width: 900px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text); }
+
+    /* ABOUT */
+    #about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; padding: 6rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .about-text { color: var(--muted); font-weight: 300; line-height: 1.8; }
+    .about-text p + p { margin-top: 1rem; }
+    .skills-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; align-content: start;
+    }
+    .skill-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .skill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* PROJECTS */
+    #projects { padding: 6rem 2.5rem; border-bottom: 1px solid var(--border); }
+    .projects-header {
+      max-width: 1200px; margin: 0 auto 3.5rem;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .projects-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .project-thumb {
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .thumb-1 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .thumb-2 { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+    .thumb-3 { background: linear-gradient(135deg, #200122, #6f0000); }
+    .project-body { padding: 1.5rem; }
+    .project-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+    /* CONTACT */
+    #contact {
+      max-width: 700px; margin: 0 auto;
+      padding: 6rem 2.5rem;
+      text-align: center;
+    }
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .contact-sub { color: var(--muted); margin-bottom: 2.5rem; font-weight: 300; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      color: var(--muted); font-size: 0.8rem;
+    }
+
+    /* SCROLL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      #hero { padding: 0 1.2rem 3.5rem; }
+      #about { grid-template-columns: 1fr; padding: 4rem 1.2rem; }
+      #projects { padding: 4rem 1.2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      #contact { padding: 4rem 1.2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">NVA.</div>
+    <ul class="nav-links">
+      <li><a href="#about">Về tôi</a></li>
+      <li><a href="#projects">Dự án</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-blob"></div>
+    <div class="hero-content">
+      <div class="hero-tag">✦ Available for work</div>
+      <h1 class="hero-name">Nguyễn<br/><span>Văn A.</span></h1>
+      <p class="hero-desc">
+        Lập trình viên full-stack & thiết kế UI/UX.<br/>
+        Xây dựng sản phẩm số đẹp, nhanh, và có ý nghĩa.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">Xem dự án</a>
+        <a href="#contact" class="btn btn-ghost">Liên hệ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="section-eyebrow">Về tôi</div>
+      <h2 class="section-title">Code bằng tâm huyết, thiết kế bằng cảm xúc.</h2>
+      <div class="about-text">
+        <p>Tôi là sinh viên / lập trình viên đam mê xây dựng những sản phẩm web hiện đại, chú trọng trải nghiệm người dùng và hiệu năng.</p>
+        <p>Từ giao diện tối giản đến hệ thống phức tạp phía sau, tôi thích làm chủ toàn bộ vòng đời của một sản phẩm — từ ý tưởng đến lúc deploy.</p>
+      </div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-item"><span class="skill-dot"></span>HTML / CSS</div>
+      <div class="skill-item"><span class="skill-dot"></span>JavaScript</div>
+      <div class="skill-item"><span class="skill-dot"></span>React</div>
+      <div class="skill-item"><span class="skill-dot"></span>Node.js</div>
+      <div class="skill-item"><span class="skill-dot"></span>Python</div>
+      <div class="skill-item"><span class="skill-dot"></span>Figma</div>
+      <div class="skill-item"><span class="skill-dot"></span>Git / GitHub</div>
+      <div class="skill-item"><span class="skill-dot"></span>Netlify</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="projects-header reveal">
+      <div>
+        <div class="section-eyebrow">Dự án</div>
+        <h2 class="section-title">Những thứ tôi đã làm.</h2>
+      </div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-thumb thumb-1">🛒</div>
+        <div class="project-body">
+          <div class="project-tag">Web App</div>
+          <div class="project-name">Shop Online</div>
+          <p class="project-desc">Website thương mại điện tử với giỏ hàng, tìm kiếm, và thanh toán. Xây bằng React + Node.js.</p>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb thumb-2">📊</div>
+        <div class="project-body">
+          <div class="project-tag">Dashboard</div>
+          <div class="project-name">Analytics Dashboard</div>
+          <p class="project-desc">Bảng điều khiển dữ liệu realtime với biểu đồ động. Dùng Chart.js và REST API.</p>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb thumb-3">🎵</div>
+        <div class="project-body">
+          <div class="project-tag">Mobile App</div>
+          <div class="project-name">Music Player</div>
+          <p class="project-desc">Ứng dụng nghe nhạc đơn giản, giao diện tối, hỗ trợ playlist và equalizer cơ bản.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-eyebrow">Liên hệ</div>
+      <h2 class="contact-title">Hãy cùng làm gì đó hay.</h2>
+      <p class="contact-sub">Tôi đang mở cho các cơ hội mới — dự án freelance, thực tập, hoặc chỉ là một cuộc trò chuyện thú vị.</p>
+      <div class="contact-links">
+        <a href="mailto:hello@example.com" class="contact-link">📧 Email</a>
+        <a href="https://github.com/" target="_blank" class="contact-link">🐙 GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" class="contact-link">💼 LinkedIn</a>
+        <a href="https://facebook.com/" target="_blank" class="contact-link">💬 Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Nguyễn Văn A.</span>
+    <span>Làm bằng ❤️ & nhiều cà phê</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
